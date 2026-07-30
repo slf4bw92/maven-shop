@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: maven-shop
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
