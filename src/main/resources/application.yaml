@@ -1,7 +1,62 @@
 spring:
+  profiles:
+    group:
+      local: local-prop, common-prop
+      dev: dev-prop, common-prop
+      prod: prod-prop, common-prop
   application:
     name: maven-shop
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: common-prop
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+mybatis:
+  # Mapper XML 위치
+  mapper-locations: classpath:/mapper/**/*.xml
+  # DTO/VO 패키지: XML에서 전체 패키지명 생략 가능
+  type-aliases-package: com.example.mavenshop.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    # SQL 실행 로그 확인용
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+jasypt:
+  encryptor:
+    password: ${jasypt_encryptor_password}
+    # 유틸 클래스와 반드시 동일하게 설정
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    iv-generator-classname: org.jasypt.iv.RandomIvGenerator
+    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local-prop
+  datasource:
+    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://192.168.111.30:5432/mavenshop
+#    username: postgres
+#    password: password
+    url: ENC(jqtiZ9KTdqEzYoKSMXWbMBaqPWXBxa4XHificzy8vI+WrOTF1GQlIsEbwNfQ0JjALmuy2qYww9TgUc/COTn7pMtWKOc+3tM9yuvpK6RzIwA=)
+    username: ENC(q0A9RrnBIG5vnw0dRbPWxy/QhWUrxaDdhC1VMyYrE0X464JF/HtBmfREvFwqOhXk)
+    password: ENC(vGzv9tIRZ97yNd9qXjaB/sDY/wvfz9Bh2z8IghYZGxkQYIwPq2aQsvjC6np+RY5d)
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod-prop
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ENC(Gld9G7FNfgy72OBiZ3RDXOGO8mPAiN1UQyCFroSrTetG9FqCrNIjyWoO/Ds4L0EYmBzkFLveAIR/0rRoJdblhGFFa+zYa0+HsdUT/UBlvPQ=)
+    username: ENC(tRT8ZkSj1vVGEy55wcByr5DX5DRZRMQmMSZikGYM5OTs0tpckVhhLwWYzyaC8zdo)
+    password: ENC(KzSZV7gjk5brSkVIlK4RFbbuNCz4Y56zYC4OlTUF7/tL+wVnVDj/QUJUdRhLVgw4)
+

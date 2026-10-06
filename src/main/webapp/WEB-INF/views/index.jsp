@@ -16,6 +16,7 @@
   <!-- 제출 -->
   <input type="submit" value="전송">
   <button id="btnPopup" type="button">팝업</button>
+  <button id="aBtn" type="button" onclick="">a 이동 </button>
 </form>
 
 <script>
