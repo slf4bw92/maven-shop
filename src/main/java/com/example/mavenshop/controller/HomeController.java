@@ -40,6 +40,7 @@ public class HomeController {
     public String home(HttpServletRequest request, HttpServletResponse response) {
         log.info("request URL: {} ", request.getRequestURL().toString());
         log.info("this is new data");
+        log.info("Jenkins TEST!!!");
         Cookie themeCookie = new Cookie("theme", "dark");
         themeCookie.setPath("/");
         response.addCookie(themeCookie);
